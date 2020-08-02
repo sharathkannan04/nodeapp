@@ -8,8 +8,8 @@ var storage = multer.diskStorage({
         let fileDir='./uploads';
         if(!fs.existsSync(fileDir)){
             fs.mkdirSync(fileDir);
-            cb(null,fileDir);
         }
+        cb(null,fileDir);
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
