@@ -1,0 +1,386 @@
+<!-- 
+    Title:BDS
+    page description:
+    CreatedAt:23/3/2019
+    updatedAt:
+ -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/img/icons8-cosmetic-brush-40.png" type="image/png" sizes="16x16">
+  <title>Bronzer & Blush</title>
+
+  <link rel="stylesheet" type="text/css"
+    href="https://fonts.googleapis.com/css?family=Fira+Sans|Roboto:300,400|Questrial|Satisfy">
+  <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/animate.css">
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+  <style>
+    #rotate {
+      width: 35%;
+      height: 35%;
+      position: relative;
+      top: -25px;
+      /* transform: rotate(-20deg); */
+    }
+
+
+    .modal {
+      display: none;
+      /* Hidden by default */
+      position: fixed;
+      /* Stay in place */
+      z-index: 1;
+      /* Sit on top */
+      padding-top: 100px;
+      /* Location of the box */
+      left: 0;
+      top: 0;
+      width: 100%;
+      /* Full width */
+      height: 100%;
+      /* Full height */
+      overflow: auto;
+      /* Enable scroll if needed */
+      background-color: rgb(0, 0, 0);
+      /* Fallback color */
+      background-color: rgba(0, 0, 0, 0.4);
+      /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  </style>
+  <script>
+    var tag;
+    
+
+    function image(img) {
+      debugger;
+      tag = img;
+      let file = img.src.split("/");
+      let fileName = file[file.length - 1];
+      document.getElementById("fileName").value = fileName;
+      var modal = document.getElementById("myModal");
+      modal.style.display = "block";
+      var span = document.getElementsByClassName("close")[0];
+      span.onclick = function () {
+        modal.style.display = "none";
+      }
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+
+    }
+
+    function sendxhr(event, data) {
+      debugger;
+      event.preventDefault();
+      var formdata = new FormData();
+      formdata.append("photos", data[0].files[0]);
+      formdata.append("fileName", data[1].value);
+      let url = URL.createObjectURL(data[0].files[0]);
+      var requestOptions = {
+        method: 'POST',
+        body: formdata,
+        redirect: 'follow'
+      };
+      fetch("http://localhost:5000/bronzer", requestOptions)
+        .then((response)=>{
+          // debugger;
+          // response.text();
+          var modal = document.getElementById("myModal");
+          modal.style.display = "none";
+          tag.src=url;
+          
+        }).catch(error => console.log('error', error));
+
+    }
+  </script>
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+  <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <!-- <form action="http://localhost:5000/bronzer" method="POST" enctype="multipart/form-data"> -->
+      <form action="http://localhost:5000/bronzer" onsubmit="sendxhr(event,this)">
+        <input type="file" name="photos" placeholder="select a picture" />
+        <input id="fileName" type="hidden" name="fileName" />
+
+        <input type="submit" title="upload" />
+      </form>
+
+    </div>
+
+  </div>
+  <div class="header">
+    <div class="bg-color">
+      <header id="main-header">
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#lauraMenu">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Bronzer & Blush</a>
+            </div>
+            <div class="collapse navbar-collapse" id="lauraMenu">
+              <ul class="nav navbar-nav navbar-right navbar-border">
+                <li class="active"><a href="#main-header">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#testimonial">Testimonial</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+      <div class="wrapper">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12 wow fadeIn delay-05s">
+              <div class="banner-text">
+                <h2>Hi, I am <span>Saranya krishnan</span>,</h2>
+                <p>A Makeup Artist
+                  <br>& Designer
+                </p>
+              </div>
+              <div class="overlay-detail text-center">
+                <a href="#about"><i class="fa fa-angle-down"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section id="about" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 text-right">
+          <h2 class="title-text">
+            Meet<br><span class="deco">Saranya krishnan</span>
+          </h2>
+        </div>
+        <div class="col-md-6 text-left">
+          <img id="rotate" src="/img/owner.JPG" />
+          <div class="about-text">
+            <p>portfolio contents</p>
+            <p>&nbsp;</p>
+            <p>Bridal makeup artist and bridal makeovers.I believe in making you glow in your own complexion rather than
+              just making you look fair.</p>
+            <p>&nbsp;</p>
+            <ul class="abt-list">
+              <li>- Certified Makeup Artist.</li>
+              <li> </li>
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="portfolio" class="section-padding wow fadeInUp delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="title text-center">Let's <span class="deco">See</span> My Work</h2>
+        </div>
+        <div class="col-md-12">
+          <div id="myGrid" class="grid-padding">
+            <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img id="img1" src="/img/girl8.JPG" class="img-responsive">
+              <img src="/img/girl1.jpg" class="img-responsive" onclick="image(this)">
+              <img src="/img/girl2.jpg" class="img-responsive" onclick="image(this)">
+              <img src="/img/girl3.jpg" class="img-responsive" onclick="image(this)">
+              <img src="/img/girl4.jpg" class="img-responsive" onclick="image(this)">
+            </div>
+            <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img src="/img/girl10.JPG" class="img-responsive">
+              <img src="/img/girl6.JPG" class="img-responsive">
+              <img src="/img/girl11.JPG" class="img-responsive">
+              <img src="/img/girl12.JPG" class="img-responsive">
+              <!-- <img src="/img/port03.jpg" class="img-responsive"> -->
+            </div>
+            <div class="col-md-4 col-sm-4 padding-right-zero">
+              <img src="/img/girl9.JPG" class="img-responsive">
+              <img src="/img/girl7.JPG" class="img-responsive">
+              <img src="/img/girl5.jpg" class="img-responsive">
+              <img src="/img/girl13.JPG" class="img-responsive">
+
+              <!-- <img src="/img/portfolio02.jpg" class="img-responsive">
+               <img src="/img/port02.jpg" class="img-responsive"> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="testimonial" class="section-padding wow fadeInUp">
+    <div class="container">
+      <div class="row">
+        <h2 class="title text-center">See What Our <span class="deco">Client</span> Are Saying ?</h2>
+        <div class="test-sec">
+          <div class="col-sm-4">
+            <blockquote>
+              <p>Mrs.Saranya did a great job ......I loved my look on stage.... Keep up the good work!</p>
+            </blockquote>
+            <div class="carousel-info">
+              <div class="pull-left"> <span class="testimonials-name">Rohit Sri</span> <span
+                  class="testimonials-post"></span> </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <blockquote>
+              <p>Wonderful job on my makeup and my bridesmaid makeup. Thanks a lot . I felt so beautiful and happy on my
+                wedding day thanks to saranya mam. I highly recommend my makeup artist to my friends circle</p>
+            </blockquote>
+            <div class="carousel-info">
+              <div class="pull-left"> <span class="testimonials-name">Veronica Christy </span>
+                <!-- <span class="testimonials-post">CEO,  Company Inc.</span> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <blockquote>
+              <p>Master of the Art,
+                surprisingly.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </p>
+            </blockquote>
+            <div class="carousel-info">
+              <div class="pull-left"> <span class="testimonials-name">sangeetha krishnan</span>
+                <!-- <span class="testimonials-post">CEO,  Company Inc.</span> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id="contact" class="section-padding wow fadeIn delay-05s">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="contact-sec text-center">
+            <h2>Want To <span class="deco">Hire</span> Me?</h2>
+            <p>Contact Me @ phone: 9962172630<br />OR<br />Register Online</p>
+            <p></p>
+          </div>
+        </div>
+
+        <div class="col-md-8 col-md-push-2">
+          <div id="sendmessage">Your message has been sent. Thank you!</div>
+          <div id="errormessage"></div>
+          <form action="" method="post" role="form" class="contactForm">
+            <div class="form-group">
+              <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4"
+                data-msg="Please enter at least 4 chars" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <input type="phone" class="form-control" name="phone" id="phone" placeholder="Your Phone"
+                data-rule="Phone" data-msg="Please enter your Phone number" />
+              <div class="validation"></div>
+            </div>
+            <div class="form-group">
+              <input type="date" class="form-control" name="Date" id="date" placeholder="Book my calendar on"
+                data-rule="email" data-msg="Please enter a valid date" />
+              <div class="validation"></div>
+            </div>
+            <!-- <div class="form-group">
+               <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+               <div class="validation"></div>
+             </div> -->
+            <div class="form-group">
+              <textarea class="form-control" name="message" rows="5" data-rule="required"
+                data-msg="Please write something for us" placeholder="Other Queries"></textarea>
+              <div class="validation"></div>
+            </div>
+
+            <div class="text-center"><button type="submit" class="btn btn-primary btn-lg">Send Message</button></div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <footer class="footer-2 text-center-xs bg--white">
+    <div class="container">
+      <!--end row-->
+      <div class="row">
+        <div class="col-md-6">
+          <div class="footer">
+            © Copyright. All Rights Reserved
+            <div class="credits">
+              <!--
+                 All the links in the footer should remain intact. 
+                 You can delete the links only if you purchased the pro version.
+                 Licensing information: https://bootstrapmade.com/license/
+                 Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Laura
+               -->
+              <!-- Designed by <a href="https://bootstrapmade.com/">BootstrapMade.com</a> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 text-right">
+          <ul class="social-list">
+            <li>
+              <a target="_blank" href="https://www.facebook.com/makeoverbysaranyakrishnan/"><i
+                  class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+              <a target="_blank" href="https://www.instagram.com/saranya.krishnan6/"><i class="fa fa-instagram"></i></a>
+            </li>
+          </ul>
+          <p id="myBtn">..</p>
+        </div>
+
+      </div>
+      <!--end row-->
+    </div>
+  </footer>
+
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.easing.min.js"></script>
+  <script src="/js/bootstrap.min.js"></script>
+  <script src="/js/jquery.bxslider.min.js"></script>
+  <script src="/js/wow.js"></script>
+  <script src="/js/custom.js"></script>
+  <script src="contactform/contactform.js"></script>
+
+</body>
+
+</html>
