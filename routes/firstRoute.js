@@ -1,10 +1,15 @@
 var express = require('express')
 var router = express.Router()
+const fs=require('fs');
 
 var multer = require('multer');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, './uploads')
+        let fileDir='./uploads';
+        if(!fs.existsSync(fileDir)){
+            fs.mkdirSync(fileDir);
+            cb(null,fileDir);
+        }
     },
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
@@ -34,5 +39,9 @@ router.post('/', upload.array('photos', 12), (req, res) => {
     console.log(req.body);
     res.send("ok")
 })
+
+
+
+
 
 module.exports = router
