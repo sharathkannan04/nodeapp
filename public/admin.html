@@ -112,7 +112,7 @@
         body: formdata,
         redirect: 'follow'
       };
-      fetch("http://localhost:5000/bronzer", requestOptions)
+      fetch("https://limitless-tor-26869.herokuapp.com/bronzer", requestOptions)
         .then((response)=>{
           // debugger;
           // response.text();
@@ -133,7 +133,7 @@
     <div class="modal-content">
       <span class="close">&times;</span>
       <!-- <form action="http://localhost:5000/bronzer" method="POST" enctype="multipart/form-data"> -->
-      <form action="http://localhost:5000/bronzer" onsubmit="sendxhr(event,this)">
+      <form action="https://limitless-tor-26869.herokuapp.com/bronzer" onsubmit="sendxhr(event,this)">
         <input type="file" name="photos" placeholder="select a picture" />
         <input id="fileName" type="hidden" name="fileName" />
 
